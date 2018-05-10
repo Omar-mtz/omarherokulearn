@@ -1,0 +1,130 @@
+<!-- <div ng-controller="cart">
+
+  <div ng-if="carrito != undefined">
+    <div ng-if="carrito.productos.length>0" class="columns is-multiline" >
+      <div class="column is-2" ng-repeat="producto in carrito.productos">
+        <div class="card">
+          <div class="card-image column">
+            <figure >
+              <img class="image " ng-src="{{producto.dispimg}}" alt="Placeholder image">
+            </figure>
+            <p class="idproduct-top"><a class="tag is-dark" ui-sref="individual({ producto_codigo: producto.codigo })" ng-mouseover="getProduct(producto.codigo)" >{{producto.codigo}}</a> </p>
+          </div>
+          <div class="card-content column" >
+            <div class="media-content">
+              <p class="title is-white is-10">{{producto.titulo}}</p>
+              <p class="subtitle is-10">{{"Cantidad:"+ producto.qty}}</p> 
+              <p class="subtitle is-10">{{(producto.modelos[producto.selmodel].color ||producto.modnsize.color)+" "+(producto.modelos[producto.selmodel].adicional||producto.modnsize.modelo)}}</p> 
+              <a class="button is-danger" ui-sref="carrito" ng-click="delFromCart(producto,$index)" >Quitar</a> 
+              <br>
+              <br>
+              <a class="button is-primary" ui-sref="carrito" ng-mouseover="show=true" ng-click="addtoCart(producto, qtyadd,$index)" >Agregar Mas..</a> 
+              <input ng-show="show" ng-model="qtyadd" class="input is-rounded" type="number" placeholder="0"  min="1" max="10000">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-12">
+        <div class="button is-primary" ng-confirm-click="Confirmar pedido ?" confirmed-click="goQuot()"  >CONFIRMAR PEDIDO</div>
+        
+      </div>
+      <div class="column is-12">
+       <div class="button is-danger" ng-confirm-click="Deseas eliminar todos tus productos del carrito?" confirmed-click="emptyCart()">ELIMINAR TODO</div>
+     </div>
+
+     
+     
+   </div>
+   
+
+   <div ng-if="carrito.productos.length===0" >
+    <h1>Aun no has comprado nada!</h1>
+  </div>
+  
+
+</div>
+</div> -->
+
+
+<div ng-controller="cart">
+  <div ng-if="carrito != undefined">
+    <div ng-if="carrito.productos.length>0" class="columns is-multiline containerRandom" >
+      
+      <div class="column is-12">
+        <div class="cart-table column is-8 is-offset-2">
+          <div ng-if="carrito.productos.length===0" >
+            <h1>Aún no has comprado nada!</h1>
+          </div>
+
+
+            <table class="table table-xs">
+              <tr>
+               
+                <th class="text-right">Código</th>
+                <th class="text-right">Imagen</th>
+                <th class="text-right">Título</th>
+                <th class="text-right">Cantidad</th>
+                <th class="text-right">Acciones</th>
+
+              </tr>
+              <tr class="item-row" ng-repeat="producto in carrito.productos track by $index">
+                <td class="text-right"><p class="show-mobile has-text-weight-bold ">Código:</p> {{producto.codigo}} </td>
+                <td>
+                  <div class="delete-mobile"> <a ui-sref="carrito" ng-click="delFromCart(producto,$index)" class="fa fa-trash-o fa-2x red" ></a></div>
+
+                  <img class="thumb" ng-src="{{producto.dispimg}}" >
+                </td>
+                <td class="text-right" >{{producto.titulo}}</td>
+                <td class="text-right" ><p class="show-mobile has-text-weight-bold  ">Cantidad:</p>{{producto.qty}}</td>
+                <td class="text-right" >
+                    <div class="corner hide-mobile">
+                      <a ng-click="delFromCart(producto,$index)" class="fa fa-trash-o fa-2x red" ></a>
+                    </div>
+                    <div class="hide-mobile">
+                      
+                      <br>
+                    </div>
+
+                    <div class="corner">
+                      <a  class="button is-square is-info" ng-mouseover="show=true" ng-click="addtoCart(producto, qtyadd,$index)" >Agregar más</a> 
+                    </div>
+
+                    <div class="corner">
+                      <input ng-show="show" ng-model="qtyadd" class="input sminput" type="number" placeholder="0"  min="1" max="10000">
+                    </div>
+
+                </td>
+              </tr>
+            </table>
+
+           
+
+        </div>
+      </div>
+        <div class="column is-12 has-text-centered confirmar">
+      <div class="button is-primary" ng-click="goQuot()"  >CONFIRMAR PEDIDO</div>
+      
+
+
+      <div class="button is-danger" ng-click="emptyCart()">ELIMINAR TODO</div>
+
+    </div>
+
+    </div>
+
+  
+
+    
+  </div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+<section class="sitepagination">
+  <dir-pagination-controls > </dir-pagination-controls>
+</section>
+<br><br>
+<center >
+  <div class="noproducts" ng-show="productos.length == 0">
+     <p> Lo sentimos, aún no hay productos en esta categoría  </p>
+     <img src="../img/alogo.jpg"> 
+  </div>
+
+ <section class="containerRandom" ng-if="productos.length < 4">
+  <div class="columns is-variable is-multiline">
+    <div class="column static-position" dir-paginate="producto in productos | itemsPerPage:35">
+      <a ui-sref="individual({ producto_codigo: producto.codigo })" onclick="toTop()"><div class="card">
+        <div class="card-image">
+          <figure>
+            <img ng-src="{{producto.imglink}}" err-src="http://via.placeholder.com/250x250/ffffff" alt="Imagen de Producto" title="{{producto.titulo}}">                
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <span class="tag is-light tagproduct">{{producto.titulo}}</span>
+            <p class="idproduct">{{producto.codigo}} </p>
+          </div> 
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+ <section class="containerRandom" ng-if="productos.length >= 4">
+  <div class="columns is-variable is-multiline">
+    <div class="column is-3 static-position" dir-paginate="producto in productos | itemsPerPage:35">
+      <a ui-sref="individual({ producto_codigo: producto.codigo })" onclick="toTop()"><div class="card">
+        <div class="card-image">
+          <figure>
+            <img ng-src="{{producto.imglink}}" err-src="http://via.placeholder.com/250x250/ffffff" alt="Imagen de Producto" title="{{producto.titulo}}">                
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <span class="tag is-light tagproduct">{{producto.titulo}}</span>
+            <p class="idproduct">{{producto.codigo}} </p>
+          </div> 
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="sitepagination">
+ <dir-pagination-controls > </dir-pagination-controls>
+</section>
+

@@ -1,0 +1,40 @@
+{
+  "name": "st-eventosaktum",
+  "version": "0.0.1",
+  "description": "Sitio Web eventos aktum",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisvcastilla/st-eventosaktum.git"
+  },
+  "keywords": [
+    "eventos",
+    "aktum",
+    "sititec"
+  ],
+  "author": "sititec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisvcastilla/st-eventosaktum/issues"
+  },
+  "homepage": "https://github.com/luisvcastilla/st-eventosaktum#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.6",
+    "@uirouter/angularjs": "^1.0.15",
+    "angular": "^1.6.10",
+    "angular-route": "^1.6.10",
+    "angular-utils-pagination": "^0.11.1",
+    "angularjs": "0.0.1",
+    "angularjs-tooltips": "^1.0.5",
+    "animate.css": "^3.6.1",
+    "bulma": "^0.6.2",
+    "fontawesome": "^4.7.2",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.5",
+    "ng-confirm": "^1.1.0",
+    "sweetalert": "^2.1.0"
+  }
+}

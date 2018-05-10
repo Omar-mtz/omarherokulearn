@@ -1,0 +1,32 @@
+<div class="main-image">
+	<div>
+		<h1 class="animated fadeIn">TÚ LO IMAGINAS... NOSOTROS LO HACEMOS REALIDAD.</h1>
+		<div class="info">
+			<h1>4 85 04 89</h1>
+			<h2>Pedro Figueroa 818</h2>
+			<p>COL. REAL DE PEÑA</p>
+			<hr>
+			<p>Horario de oficina: Lunes a Viernes de 9:00am a 2:00pm y de 4:00pm a 7:00pm. Sábados de 9:00am a 2:00pm</p>
+			<button onclick="verMas()"><h1>VER MAS</h1></button>
+		</div>
+	</div>
+</div>
+
+<br>
+<center>
+	<h2>Productos recomendados</h2>
+</center>
+<br>
+<div class="containerRandom" ng-controller="mainRandom">
+	<div class="randomItem"  ng-repeat="producto in $root.randomProducts" >
+		<a ui-sref="individual({ producto_codigo: producto.codigo })">
+			<img ng-src="{{ 'https://promocionalesapi.s3.amazonaws.com/catalogo/md/' + producto.img }}" err-src="http://via.placeholder.com/250x250/ffffff">
+		</a>
+
+		<p class="titulo">{{producto.titulo}}</p>
+
+		<p class="pruduct_code"><a class="tag is-dark" ui-sref="individual({ producto_codigo: producto.codigo })"> {{producto.codigo}} </a></p>
+
+		<h1 class="nuevo" ng-if="producto.resaltar === '1' ">¡NUEVO!</h1>
+	</div>
+</div>

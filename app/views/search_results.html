@@ -1,0 +1,66 @@
+<br><br>
+
+
+<section ng-if="results.productos.length >= 1" class="sitePaginator">
+	<dir-pagination-controls > </dir-pagination-controls>
+</section>
+<br><br>
+<center>
+	<h2 ng-if="results.productos.length >= 1">Resultados de la búsqueda: "{{ palabra_clave }}" </h2>
+</center>
+
+
+
+<br><br><br>
+
+<center >
+  <div ng-if="results.productos.length < 1">
+     <p> No se encontraron resultados.  </p>
+     <img src="../img/alogo.jpg"> 
+  </div>
+</center>
+
+<section class="containerRandom" ng-if="results.productos.length < 4">
+	<div class="columns is-variable is-multiline">
+		<div class="column static-position" dir-paginate="producto in results.productos | itemsPerPage:35">
+			<a ui-sref="individual({ producto_codigo: producto.codigo })" onclick="toTop()"><div class="card">
+				<div class="primary">
+					<div class="card-image">
+						<figure>
+							<img  ng-src="{{ 'https://promocionalesapi.s3.amazonaws.com/catalogo/md/' + producto.img }}" alt="Imagen de Producto" title="{{producto.titulo}}" err-src="http://via.placeholder.com/250x250/ffffff">                 
+						</figure>
+					</div>
+				</div>
+				<div class="card-content">
+					<div class="content">
+						<span class="tag is-light tagproduct">{{producto.titulo}}</span>
+						<p class="idproduct">{{producto.codigo}} </p>
+					</div> 
+				</div>
+			</a>
+		</div>
+	</div>
+</section>
+
+<section class="containerRandom" ng-if="results.productos.length >= 4">
+	<div class="columns is-variable is-multiline">
+		<div class="column is-3 static-position" dir-paginate="producto in results.productos | itemsPerPage:35">
+			<a ui-sref="individual({ producto_codigo: producto.codigo })" onclick="toTop()"><div class="card">
+				<div class="card-image">
+					<figure>
+						<img  ng-src="{{ 'https://promocionalesapi.s3.amazonaws.com/catalogo/md/' + producto.img }}" alt="Imagen de Producto" title="{{producto.titulo}}" err-src="http://via.placeholder.com/250x250/ffffff">                 
+					</figure>
+				</div>
+				<div class="card-content">
+					<div class="content">
+						<span class="tag is-light tagproduct">{{producto.titulo}}</span>
+						<p class="idproduct">{{producto.codigo}} </p>
+					</div> 
+				</div>
+			</a>
+		</div>
+	</div>
+</section>
+
+
+

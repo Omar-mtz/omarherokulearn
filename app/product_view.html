@@ -1,0 +1,178 @@
+<section ng-controller="viewProduct" class=" main">
+  <section class="product">
+    <section class="product-info">
+      <div class="container">
+        <div class="clearfix">
+          <span class="idproduct-top">
+
+            <a class="button butoom" onclick="history.back()">
+              <span class="icon">
+                <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+              </span>
+              <span>Regresar</span>
+              <span class="topafter"></span>
+            </a>
+          </span>
+        </div>
+        <div class="columns">
+          <div class="column is-6 static-position">
+            <div class="product-images">
+              <div class="box">
+                <div class="primary">
+                  <img ng-src="{{producto.imglink}}" err-src="http://via.placeholder.com/250x250/ffffff">
+                </div>
+                <div class="relatedImages" >
+                  <img  ng-src="https://promocionalesapi.s3.amazonaws.com/catalogo/sm/{{ imgItem.imagen }}" ng-click="changeImage($index)"  ng-repeat="imgItem in producto.imagenes" id="related-{{$index}}" class="relatedItem">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column is-6"><!-- Product content -->
+            <div class="product-content">
+              <div class="box"><!--Caja -->
+                <uib-tab heading="Producto">
+                  <uib-tab-heading >
+                    <ul class="nav-tabs"> 
+                    </ul>
+                  </uib-tab-heading>
+                  <div class="details">
+                    <h1>{{producto.titulo}}</h1>
+                    <div class="prices"><span class="price">{{producto.codigo}}</span></div>
+                  </div>
+                  <div class="short-description">
+                    <p> {{producto.descripcion}}.</p>
+                  </div>
+                  <div class="options">
+                    <div class="columns"><!--Columna de descripción-->
+                      <div class="column is-6">
+                        <div class="form-group">
+                          <label for="product_options" class="control-label">Material</label>
+                          <div class="controls">
+                            <p>{{producto.material}}</p>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="product_options" class="control-label">Medida</label>
+                          <div class="controls">
+                            <p>{{producto.medida}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="column is-6">
+                        <div class="form-group">
+                          <label for="product_options" class="control-label">Área de impresión </label>
+                          <div class="controls">
+                            <p>{{producto.area_impresion}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </uib-tab>
+                <!--Columna de descripción-->
+                <div class="table-responsive"> <!--OpenTable-->
+                  <table class="table table-condensed tabla-modelos">
+                    <tbody ng-show="producto.modelos.length <= 7" ng-repeat="modelo in producto.modelos">
+                      <tr>
+                        <td>
+                          <div class="product-imagesview modelImage activeImage" ng-if="$index === 0" id="model-{{$index}}">
+                            <img ng-src="{{modelo.imglink}}" alt="" ng-click="changeModelImage($index)">
+                          </div>
+                          <div class="product-imagesview modelImage" ng-if="$index != 0" id="model-{{$index}}" ng-class="class">
+                            <img ng-src="{{modelo.imglink}}" alt="" ng-click="changeModelImage($index)">
+                          </div>
+                        </td>
+                        <td><span style="cursor: pointer;" class="tag is-white" ng-click="changeModelImage($index)">{{producto.codigo + " "+(modelo.color||"")+" "+(modelo.adicional||"")}}</span>
+                        </td>
+                        <td>
+                          <form ng-submit="validar(producto,qty,modelo.index)">
+                            <input ng-model="qty" class="input is-rounded is-small productAdd" type="number" placeholder="0" size="5" min="producto.minimo_piezas" max="10000" title="El mínimo de artículos es:  {{producto.minimo_piezas}}"> 
+                            <button type="submit" class="button is-small butoom">
+                              <span class="icon">
+                                <i class='fa fa-plus'></i>
+                              </span>
+                              <span>Añadir</span>
+
+                            </button>
+                          </form>
+
+                        </td>
+
+                        <tbody ng-show="producto.modelos.length > 7">
+                          <tr>
+                            <th>
+                              <div class="product-imagesview">
+                                <img  ng-src="{{producto.imglink}}" alt="Placeholder image">
+                              </div>
+                            </th>                                 
+                            <td> 
+                              <form ng-submit="addSpecial(producto, qty,{'color':producto.colores[clr], 'modelo':producto.models[mdl] })" >
+                              </form>
+
+                              Color: 
+                              <div class="field">
+                                <div class="control">
+                                  <div class="select">
+                                    <select  ng-change="changeColor(clr)" ng-model="clr">
+                                      <option ng-repeat="color in producto.colores track by $index" value="{{$index}}">{{color}}</option>
+                                      <option value="" selected hidden />
+                                      <option value="" selected>Seleccionar color</option>
+
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              Medida: 
+                              <div class="field">
+                                <div class="control">
+                                  <div class="select">
+                                    <select  ng-model="mdl">
+                                      <option ng-repeat="modelo in producto.models track by $index" value="{{$index}}">{{modelo}}</option>
+                                      <option value="" selected hidden />
+                                      <option value="" selected>Seleccionar talla o modelo</option>
+
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <input class="innumber" ng-model="qty" class="input is-rounded is-small" type="number"  placeholder="0" size="5" min="producto.minimo_piezas" max="10000" title="La cantidad mínima requerida son: {{producto.minimo_piezas}} piezas">
+                              <a class="button is-small butoom" ng-click="addSpecial(producto, qty,{'color':clr, 'modelo':mdl })" > 
+                                <span class="icon">
+                                  <i class='fa fa-plus'></i>
+                                </span>
+                                <span>Añadir</span>
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </tr>                                                   
+                    </tbody>
+                  </table>
+                </div> <!--Cierra Tabla-->
+                <br>
+                <span class="tag is-light">{{"Mínimo de piezas:  "+ producto.minimo_piezas}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+  <center>
+    <h2>Revisa otras opciones similares...</h2>
+  </center>
+  <br>
+  <div class="containerRandom" ng-controller="mainRandom">
+    <div class="randomItem"  ng-repeat="producto in related.productos" >
+      <a ui-sref="individual({ producto_codigo: producto.codigo })">
+        <img ng-src="{{ 'https://promocionalesapi.s3.amazonaws.com/catalogo/md/' + producto.img }}" onclick="toTop()" err-src="http://via.placeholder.com/250x250/ffffff">
+      </a>
+      <p class="titulo">{{producto.titulo}}</p>
+      <p class="pruduct_code"><a class="tag is-dark" ui-sref="individual({ producto_codigo: producto.codigo })"> {{producto.codigo}} </a></p>
+      <h1 class="nuevo" ng-if="producto.resaltar === '1' ">¡NUEVO!</h1>
+    </div>
+  </div>
+</section>
+</section>
